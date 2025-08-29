@@ -17,11 +17,9 @@ RUN chmod +x mvnw
 # Build the application and skip tests for faster build
 RUN ./mvnw clean package -DskipTests
 
-# Copy the generated jar to app.jar
-COPY target/*.jar app.jar
+# The jar is already in target folder inside the image
+# Set the entrypoint to run the jar
+ENTRYPOINT ["java","-jar","/app/target/your-artifact-name.jar"]
 
 # Expose port 8080
 EXPOSE 8080
-
-# Run the application
-ENTRYPOINT ["java","-jar","/app/app.jar"]
