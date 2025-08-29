@@ -19,7 +19,7 @@ RUN ./mvnw clean package -DskipTests
 
 # The jar is already in target folder inside the image
 # Set the entrypoint to run the jar
-ENTRYPOINT ["java","-jar","/app/target/your-artifact-name.jar"]
+ENTRYPOINT ["java","-jar","/app/target/ddaConfigurationApp-0.0.1-SNAPSHOT.jar"]
 
 # Expose port 8080
 EXPOSE 8080
