@@ -1,5 +1,5 @@
-# Use official OpenJDK 17 image as base
-FROM openjdk:17-jdk-slim
+# Use official OpenJDK 19 image as base
+FROM openjdk:19-oracle
 
 # Set working directory
 WORKDIR /app
@@ -14,13 +14,13 @@ COPY src src
 # Make mvnw executable
 RUN chmod +x mvnw
 
-# Package the application
+# Build the application and skip tests for faster build
 RUN ./mvnw clean package -DskipTests
 
-# Copy the generated jar
+# Copy the generated jar to app.jar
 COPY target/*.jar app.jar
 
-# Expose port
+# Expose port 8080
 EXPOSE 8080
 
 # Run the application
