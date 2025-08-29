@@ -1,40 +1,27 @@
-# =========================================================================
-# Stage 1: Build Stage
-# =========================================================================
-FROM maven:3.8.5-openjdk-17 AS build
+# Use official OpenJDK 17 image as base
+FROM openjdk:17-jdk-slim
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy the Maven project definition file (pom.xml) first.
-COPY pom.xml .
+# Copy Maven wrapper and pom.xml
+COPY mvnw pom.xml ./
+COPY .mvn .mvn
 
-# Copy the Maven wrapper
-COPY .mvn/ .mvn
-COPY mvnw .
-COPY mvnw.cmd .
+# Copy source code
+COPY src src
 
-# Copy the rest of the application's source code
-COPY src ./src
+# Make mvnw executable
+RUN chmod +x mvnw
 
-# Run the Maven package command to build the JAR.
-# -DskipTests skips running tests during the build, which is common for Docker builds.
-RUN mvn package -DskipTests
+# Package the application
+RUN ./mvnw clean package -DskipTests
 
+# Copy the generated jar
+COPY target/*.jar app.jar
 
-# =========================================================================
-# Stage 2: Final Image Stage
-# =========================================================================
-FROM eclipse-temurin:17-jre
-
-# Set the working directory
-WORKDIR /app
-
-
-
-# Expose the port the application runs on (default for Spring Boot is 8080)
+# Expose port
 EXPOSE 8080
 
-# The command to run the application when the container starts
-ENTRYPOINT ["java", "-jar", "app.jar"]
-
+# Run the application
+ENTRYPOINT ["java","-jar","/app/app.jar"]
