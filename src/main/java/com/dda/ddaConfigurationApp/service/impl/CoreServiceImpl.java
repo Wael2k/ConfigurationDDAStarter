@@ -56,11 +56,11 @@ public class CoreServiceImpl implements CoreService {
                 configDDAProjectDto.getJourneyType(),
                 configDDAProjectDto.getScreenComponentsList()
         );
-        updateJourneyTypeEnum(
-                configDDAProjectDto.getPathCore(),
-                configDDAProjectDto.getServiceName(),
-                configDDAProjectDto.getJourneyType()
-        );
+//        updateJourneyTypeEnum(
+//                configDDAProjectDto.getPathCore(),
+//                configDDAProjectDto.getServiceName(),
+//                configDDAProjectDto.getJourneyType()
+//        );
     }
 
     private void createServiceFolders(String basePath, String serviceName) throws Exception {
@@ -137,7 +137,7 @@ public class CoreServiceImpl implements CoreService {
     }
 
     public static void updateJourneyTypeEnum(String pathCore, String serviceName, String journeyType) throws IOException {
-        File file = new File(pathCore+ "\\journey\\types\\JourneyType");
+        File file = new File(pathCore+ "\\journey\\types\\JourneyType.java");
         Path filePath = file.toPath();
         String content = Files.readString(filePath, StandardCharsets.UTF_8);
 
