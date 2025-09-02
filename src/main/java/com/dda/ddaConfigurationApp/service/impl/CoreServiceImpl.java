@@ -137,7 +137,7 @@ public class CoreServiceImpl implements CoreService {
     }
 
     public static void updateJourneyTypeEnum(String pathCore, String serviceName, String journeyType) throws IOException {
-        File file = new File(pathCore+ "\\journey\\types\\JourneyType.java");
+        File file = new File(pathCore+ "\\journey\\types\\JourneyType");
         Path filePath = file.toPath();
         String content = Files.readString(filePath, StandardCharsets.UTF_8);
 
