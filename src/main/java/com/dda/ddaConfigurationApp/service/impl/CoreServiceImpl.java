@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.List;
@@ -56,11 +55,11 @@ public class CoreServiceImpl implements CoreService {
                 configDDAProjectDto.getJourneyType(),
                 configDDAProjectDto.getScreenComponentsList()
         );
-//        updateJourneyTypeEnum(
-//                configDDAProjectDto.getPathCore(),
-//                configDDAProjectDto.getServiceName(),
-//                configDDAProjectDto.getJourneyType()
-//        );
+        updateJourneyTypeEnum(
+                configDDAProjectDto.getPathCore(),
+                configDDAProjectDto.getServiceName(),
+                configDDAProjectDto.getJourneyType()
+        );
     }
 
     private void createServiceFolders(String basePath, String serviceName) throws Exception {
